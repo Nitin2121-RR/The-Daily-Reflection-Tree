@@ -1,0 +1,380 @@
+{
+  "START": {
+    "type": "start",
+    "text": "Good evening. Let's take an honest look at your day — not to judge, but to understand.",
+    "next": "Q1"
+  },
+
+  "Q1": {
+    "type": "question",
+    "axis": "Axis 1 — Locus",
+    "text": "When something didn't go as planned today, what was your first reaction?",
+    "options": [
+      "I thought about what I could have done differently",
+      "I felt frustrated by things outside my control",
+      "I adapted and found another way",
+      "I waited for someone else to fix it"
+    ],
+    "next": {
+      "I thought about what I could have done differently": "D1_INTERNAL",
+      "I felt frustrated by things outside my control": "D1_EXTERNAL",
+      "I adapted and found another way": "D1_INTERNAL",
+      "I waited for someone else to fix it": "D1_EXTERNAL"
+    }
+  },
+
+  "D1_INTERNAL": {
+    "type": "decision",
+    "signal": "locus:internal",
+    "next": "Q2_INTERNAL"
+  },
+  "D1_EXTERNAL": {
+    "type": "decision",
+    "signal": "locus:external",
+    "next": "Q2_EXTERNAL"
+  },
+
+  "Q2_INTERNAL": {
+    "type": "question",
+    "axis": "Axis 1 — Locus (internal follow-up)",
+    "text": "When you reflect on a setback today, where did your mind go first?",
+    "options": [
+      "What I could control and change",
+      "What I learned from it",
+      "How to prevent it next time"
+    ],
+    "signal": "locus:internal",
+    "next": {
+      "What I could control and change": "REF_LOCUS_AGENCY",
+      "What I learned from it": "REF_LOCUS_GROWTH",
+      "How to prevent it next time": "REF_LOCUS_PROACTIVE"
+    }
+  },
+  "Q2_EXTERNAL": {
+    "type": "question",
+    "axis": "Axis 1 — Locus (external follow-up)",
+    "text": "When things went wrong today, what felt most true?",
+    "options": [
+      "The situation was genuinely unfair",
+      "I didn't have the support I needed",
+      "I'm not sure I had any real choice"
+    ],
+    "signal": "locus:external",
+    "next": {
+      "The situation was genuinely unfair": "REF_LOCUS_UNFAIR",
+      "I didn't have the support I needed": "REF_LOCUS_SUPPORT",
+      "I'm not sure I had any real choice": "REF_LOCUS_CHOICE"
+    }
+  },
+
+  "REF_LOCUS_AGENCY": {
+    "type": "reflection",
+    "text": "Focusing on what you can control is the foundation of resilience. That instinct is worth protecting.",
+    "next": "BRIDGE_1_2"
+  },
+  "REF_LOCUS_GROWTH": {
+    "type": "reflection",
+    "text": "Treating setbacks as data is a growth mindset in practice. You're building something durable.",
+    "next": "BRIDGE_1_2"
+  },
+  "REF_LOCUS_PROACTIVE": {
+    "type": "reflection",
+    "text": "Thinking ahead after a stumble is how patterns get broken. That's agency at work.",
+    "next": "BRIDGE_1_2"
+  },
+  "REF_LOCUS_UNFAIR": {
+    "type": "reflection",
+    "text": "Some situations are genuinely unfair — that's real. The question worth sitting with: was there any small choice available to you, even inside the unfairness?",
+    "next": "BRIDGE_1_2"
+  },
+  "REF_LOCUS_SUPPORT": {
+    "type": "reflection",
+    "text": "Needing support is legitimate. And noticing the gap is the first step to either asking for it or building it yourself.",
+    "next": "BRIDGE_1_2"
+  },
+  "REF_LOCUS_CHOICE": {
+    "type": "reflection",
+    "text": "There's almost always a micro-choice available — even if it's just how you interpret what happened. That's not blame. That's power.",
+    "next": "BRIDGE_1_2"
+  },
+
+  "BRIDGE_1_2": {
+    "type": "bridge",
+    "text": "Now let's shift from how you responded to what you gave today.",
+    "next": "Q3"
+  },
+
+  "Q3": {
+    "type": "question",
+    "axis": "Axis 2 — Contribution",
+    "text": "Which of these best describes a moment from your day?",
+    "options": [
+      "I helped someone with something that wasn't my responsibility",
+      "I felt I deserved more recognition for my work",
+      "I did something extra without being asked",
+      "I felt frustrated that others weren't pulling their weight"
+    ],
+    "next": {
+      "I helped someone with something that wasn't my responsibility": "D2_CONTRIBUTION",
+      "I felt I deserved more recognition for my work": "D2_ENTITLEMENT",
+      "I did something extra without being asked": "D2_CONTRIBUTION",
+      "I felt frustrated that others weren't pulling their weight": "D2_ENTITLEMENT"
+    }
+  },
+
+  "D2_CONTRIBUTION": {
+    "type": "decision",
+    "signal": "orientation:contribution",
+    "next": "Q4_CONTRIBUTION"
+  },
+  "D2_ENTITLEMENT": {
+    "type": "decision",
+    "signal": "orientation:entitlement",
+    "next": "Q4_ENTITLEMENT"
+  },
+
+  "Q4_CONTRIBUTION": {
+    "type": "question",
+    "axis": "Axis 2 — Contribution (follow-up)",
+    "text": "When you gave that extra effort today, what was driving it?",
+    "options": [
+      "I genuinely wanted to help",
+      "I saw a gap and filled it",
+      "It felt like the right thing to do"
+    ],
+    "signal": "orientation:contribution",
+    "next": {
+      "I genuinely wanted to help": "REF_CONTRIB_GENUINE",
+      "I saw a gap and filled it": "REF_CONTRIB_GAP",
+      "It felt like the right thing to do": "REF_CONTRIB_VALUES"
+    }
+  },
+  "Q4_ENTITLEMENT": {
+    "type": "question",
+    "axis": "Axis 2 — Entitlement (follow-up)",
+    "text": "When you felt that frustration or unmet expectation, what did you do with it?",
+    "options": [
+      "I let it sit and it affected my mood",
+      "I brought it up with someone",
+      "I tried to refocus on what I could do"
+    ],
+    "signal": "orientation:entitlement",
+    "next": {
+      "I let it sit and it affected my mood": "REF_ENTITLE_PASSIVE",
+      "I brought it up with someone": "REF_ENTITLE_VOCAL",
+      "I tried to refocus on what I could do": "REF_ENTITLE_REDIRECT"
+    }
+  },
+
+  "REF_CONTRIB_GENUINE": {
+    "type": "reflection",
+    "text": "Helping because you want to — not because you have to — is what builds real trust on a team.",
+    "next": "BRIDGE_2_3"
+  },
+  "REF_CONTRIB_GAP": {
+    "type": "reflection",
+    "text": "Seeing what needs doing and doing it without being asked is rare. That's organizational citizenship in action.",
+    "next": "BRIDGE_2_3"
+  },
+  "REF_CONTRIB_VALUES": {
+    "type": "reflection",
+    "text": "Acting from values rather than obligation is a sign of character. That kind of consistency compounds.",
+    "next": "BRIDGE_2_3"
+  },
+  "REF_ENTITLE_PASSIVE": {
+    "type": "reflection",
+    "text": "Unspoken frustration is expensive — it costs you energy and changes nothing. Tomorrow, try naming it, even just to yourself.",
+    "next": "BRIDGE_2_3"
+  },
+  "REF_ENTITLE_VOCAL": {
+    "type": "reflection",
+    "text": "Raising it is better than holding it. The question is whether the conversation was about what you need — or what you could give.",
+    "next": "BRIDGE_2_3"
+  },
+  "REF_ENTITLE_REDIRECT": {
+    "type": "reflection",
+    "text": "Catching yourself and refocusing is real self-awareness. That pivot from 'what I deserve' to 'what I can do' is the whole game.",
+    "next": "BRIDGE_2_3"
+  },
+
+  "BRIDGE_2_3": {
+    "type": "bridge",
+    "text": "One more lens. Let's look at how wide your circle of concern was today.",
+    "next": "Q5"
+  },
+
+  "Q5": {
+    "type": "question",
+    "axis": "Axis 3 — Radius",
+    "text": "When you think about today's biggest challenge, who comes to mind?",
+    "options": [
+      "Just me — it was my problem to solve",
+      "My team — we were all affected",
+      "A specific colleague who had it harder than me",
+      "The customer or end user we're serving"
+    ],
+    "next": {
+      "Just me — it was my problem to solve": "D3_SELF",
+      "My team — we were all affected": "D3_TEAM",
+      "A specific colleague who had it harder than me": "D3_OTHER",
+      "The customer or end user we're serving": "D3_BEYOND"
+    }
+  },
+
+  "D3_SELF": {
+    "type": "decision",
+    "signal": "radius:self",
+    "next": "Q6_SELF"
+  },
+  "D3_TEAM": {
+    "type": "decision",
+    "signal": "radius:team",
+    "next": "Q6_TEAM"
+  },
+  "D3_OTHER": {
+    "type": "decision",
+    "signal": "radius:other",
+    "next": "Q6_OTHER"
+  },
+  "D3_BEYOND": {
+    "type": "decision",
+    "signal": "radius:beyond",
+    "next": "Q6_BEYOND"
+  },
+
+  "Q6_SELF": {
+    "type": "question",
+    "axis": "Axis 3 — Radius (self follow-up)",
+    "text": "While you were working through that challenge, did anyone else cross your mind?",
+    "options": [
+      "Not really — I was heads down",
+      "Briefly, but I stayed focused on my part",
+      "Yes, I wondered how it was affecting others"
+    ],
+    "signal": "radius:self",
+    "next": {
+      "Not really — I was heads down": "REF_RADIUS_NARROW",
+      "Briefly, but I stayed focused on my part": "REF_RADIUS_EMERGING",
+      "Yes, I wondered how it was affecting others": "REF_RADIUS_EXPANDING"
+    }
+  },
+  "Q6_TEAM": {
+    "type": "question",
+    "axis": "Axis 3 — Radius (team follow-up)",
+    "text": "When you thought about the team being affected, what did you do?",
+    "options": [
+      "I checked in with someone",
+      "I adjusted my work to reduce their load",
+      "I kept it in mind but focused on my own tasks"
+    ],
+    "signal": "radius:team",
+    "next": {
+      "I checked in with someone": "REF_RADIUS_CHECKIN",
+      "I adjusted my work to reduce their load": "REF_RADIUS_ADJUSTED",
+      "I kept it in mind but focused on my own tasks": "REF_RADIUS_AWARE"
+    }
+  },
+  "Q6_OTHER": {
+    "type": "question",
+    "axis": "Axis 3 — Radius (other follow-up)",
+    "text": "When you noticed that colleague had it harder, what happened next?",
+    "options": [
+      "I offered help or support",
+      "I felt grateful for my own situation",
+      "I wanted to help but wasn't sure how"
+    ],
+    "signal": "radius:other",
+    "next": {
+      "I offered help or support": "REF_RADIUS_HELPED",
+      "I felt grateful for my own situation": "REF_RADIUS_GRATEFUL",
+      "I wanted to help but wasn't sure how": "REF_RADIUS_HESITANT"
+    }
+  },
+  "Q6_BEYOND": {
+    "type": "question",
+    "axis": "Axis 3 — Radius (beyond follow-up)",
+    "text": "Keeping the end user in mind — how did that shape your work today?",
+    "options": [
+      "It gave me a reason to push through difficulty",
+      "It helped me prioritize what actually mattered",
+      "It reminded me why the work is worth doing"
+    ],
+    "signal": "radius:beyond",
+    "next": {
+      "It gave me a reason to push through difficulty": "REF_RADIUS_PURPOSE",
+      "It helped me prioritize what actually mattered": "REF_RADIUS_CLARITY",
+      "It reminded me why the work is worth doing": "REF_RADIUS_MEANING"
+    }
+  },
+
+  "REF_RADIUS_NARROW": {
+    "type": "reflection",
+    "text": "Deep focus has its place. But tomorrow, try one moment of looking up — noticing how your work lands on someone else.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_EMERGING": {
+    "type": "reflection",
+    "text": "That brief awareness of others is worth expanding. The more you widen your lens, the more your work feels meaningful.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_EXPANDING": {
+    "type": "reflection",
+    "text": "Wondering how challenges affect others is the beginning of perspective-taking. That instinct makes you a better teammate.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_CHECKIN": {
+    "type": "reflection",
+    "text": "Checking in is a small act with outsized impact. People remember who showed up when things were hard.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_ADJUSTED": {
+    "type": "reflection",
+    "text": "Adjusting your work to ease someone else's load — that's what high-trust teams are built on.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_AWARE": {
+    "type": "reflection",
+    "text": "Awareness without action is still a start. Tomorrow, let that awareness move you one step further.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_HELPED": {
+    "type": "reflection",
+    "text": "Offering help when you notice someone struggling — that's Maslow's self-transcendence in everyday form.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_GRATEFUL": {
+    "type": "reflection",
+    "text": "Gratitude that comes from seeing others' struggles is grounding. Let it also move you toward them.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_HESITANT": {
+    "type": "reflection",
+    "text": "Wanting to help but not knowing how is still care. Next time, a simple 'how are you holding up?' is enough.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_PURPOSE": {
+    "type": "reflection",
+    "text": "Using the end user as fuel to push through — that's purpose-driven work. It's more sustainable than willpower alone.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_CLARITY": {
+    "type": "reflection",
+    "text": "Letting the end user guide your priorities is a form of wisdom. It cuts through noise fast.",
+    "next": "SUMMARY"
+  },
+  "REF_RADIUS_MEANING": {
+    "type": "reflection",
+    "text": "Meaning is found in contribution to something beyond yourself. You found it today.",
+    "next": "SUMMARY"
+  },
+
+  "SUMMARY": {
+    "type": "summary",
+    "text": "Today you reflected across three dimensions: where you locate control, whether you led with contribution or expectation, and how wide your circle of concern reached. Every honest answer moves the needle.",
+    "next": "END"
+  },
+  "END": {
+    "type": "end",
+    "text": "Rest well. Tomorrow you get to choose again."
+  }
+}
